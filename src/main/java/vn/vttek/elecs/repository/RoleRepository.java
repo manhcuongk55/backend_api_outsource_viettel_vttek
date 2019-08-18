@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.demo.Libreria.repository;
+package vn.vttek.elecs.repository;
 
-import com.demo.Libreria.entities.User_roles;
+import vn.vttek.elecs.entities.User_roles;
 import javax.transaction.Transactional;
 import org.springframework.data.repository.CrudRepository;
 

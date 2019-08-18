@@ -1,4 +1,4 @@
-package com.demo.Libreria.entities;
+package vn.vttek.elecs.entities;
 
 import java.io.Serializable;
 

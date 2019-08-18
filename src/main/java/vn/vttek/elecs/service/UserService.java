@@ -3,20 +3,20 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.demo.Libreria.service;
+package vn.vttek.elecs.service;
 
-import com.demo.Libreria.entities.Users;
+import vn.vttek.elecs.entities.Account;
 
 /**
  *
  * @author Master
  */
 public interface UserService {
-    public Iterable<Users> listAllUsers();
+    public Iterable<Account> listAllUsers();
 	
-    public Users getUserByName(String username);
+    public Account getUserByName(String username);
 
-    public Users saveUser(Users users);
+    public Account saveUser(Account account);
 
     public void deleteUser(String username);
     

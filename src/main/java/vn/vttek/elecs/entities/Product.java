@@ -1,4 +1,4 @@
-package com.demo.Libreria.entities;
+package vn.vttek.elecs.entities;
 
 import java.io.Serializable;
 import java.util.List;
@@ -12,7 +12,7 @@ import javax.persistence.Transient;
 
 @Entity
 @SequenceGenerator(name = "bookIdSeq", sequenceName = "book_id_seq", allocationSize=1)
-public class Book implements Serializable{
+public class Product implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "bookIdSeq")
     private Integer id;
@@ -21,9 +21,9 @@ public class Book implements Serializable{
     private String genero;
     private String autor;
     
-    public Book() {}
+    public Product() {}
 
-    public Book(String nombre, String genero, String autor) {
+    public Product(String nombre, String genero, String autor) {
         this.nombre = nombre;
         this.genero = genero;
         this.autor = autor;

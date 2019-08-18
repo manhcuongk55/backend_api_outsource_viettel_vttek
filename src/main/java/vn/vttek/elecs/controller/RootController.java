@@ -1,6 +1,6 @@
-package com.demo.Libreria.controller;
+package vn.vttek.elecs.controller;
 
-import com.demo.Libreria.entities.Users;
+import vn.vttek.elecs.entities.Account;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,7 +14,7 @@ public class RootController {
     }
     @RequestMapping("/register")
     public String register(Model model){
-        model.addAttribute("users", new Users(""));
+        model.addAttribute("users", new Account(""));
 //        model.addAttribute("message",false);
         return "register";
     }

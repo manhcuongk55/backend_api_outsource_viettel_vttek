@@ -1,7 +1,7 @@
-package com.demo.Libreria.controller;
+package vn.vttek.elecs.controller;
 
-import com.demo.Libreria.entities.Book;
-import com.demo.Libreria.service.BookService;
+import vn.vttek.elecs.entities.Product;
+import vn.vttek.elecs.service.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,12 +19,12 @@ public class LibraryController {
     
     @RequestMapping("book/new")
     public String newProduct(Model model){
-        model.addAttribute("book", new Book());
+        model.addAttribute("book", new Product());
         return "newBook";
     }
    
     @RequestMapping(value = "book", method = RequestMethod.POST)
-    public String saveBook(Book book) {
+    public String saveBook(Product book) {
         bookService.saveBook(book);
         System.out.println("save book");
         return "redirect:/books";
@@ -50,7 +50,7 @@ public class LibraryController {
     }
 
     @RequestMapping(value="/listado", method = RequestMethod.POST)
-    public ModelAndView submitAdmissionForm(@ModelAttribute("book1") Book book) {
+    public ModelAndView submitAdmissionForm(@ModelAttribute("book1") Product book) {
 
 
             ModelAndView model1 = new ModelAndView("success");

@@ -1,7 +1,7 @@
-package com.demo.Libreria.controller;
+package vn.vttek.elecs.controller;
 
-import com.demo.Libreria.entities.Users;
-import com.demo.Libreria.service.UserService;
+import vn.vttek.elecs.entities.Account;
+import vn.vttek.elecs.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,8 +15,8 @@ public class UserController {
     
     
     @RequestMapping(value = "user", method = RequestMethod.POST)
-    public String saveUser(Users users, Model model) {
-        userService.saveUser(users);
+    public String saveUser(Account account, Model model) {
+        userService.saveUser(account);
         System.out.println("save user");
         model.addAttribute("message", true);
         return "/register";

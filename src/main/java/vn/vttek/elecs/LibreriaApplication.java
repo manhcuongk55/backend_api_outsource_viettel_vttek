@@ -1,4 +1,4 @@
-package com.demo.Libreria;
+package vn.vttek.elecs;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

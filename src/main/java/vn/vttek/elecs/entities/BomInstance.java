@@ -5,12 +5,14 @@ import java.io.Serializable;
 import java.util.Date;
 
 @Entity
-@SequenceGenerator(name = "usersIdSeq", sequenceName = "users_id_seq", allocationSize=1)
-public class PartAlternate implements Serializable {
+@SequenceGenerator(name = "usersIdSeq", sequenceName = "users_id_seq", allocationSize = 1)
+public class BomInstance implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "departmentIdSeq")
     private int id;
     private int classification;
+    private String keyed_name;
+    private String owner_by_id;
     private Date create_on;
     private String manufacturer;
     private String created_by_id;
@@ -29,4 +31,16 @@ public class PartAlternate implements Serializable {
     private int source_id;
     private int related_id;
     private int sort_order;
+    private float y;
+    private float z;
+    private float x;
+    private String reference_designator;
+    private String side;
+    private float angle;
+    private String behavior;
+    private String team_id;
+    private String new_version;
+    private String css;
+    private String minor_rev;
+    private String manager_by_id;
 }

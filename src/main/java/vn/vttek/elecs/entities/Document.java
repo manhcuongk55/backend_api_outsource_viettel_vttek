@@ -1,9 +1,30 @@
 package vn.vttek.elecs.entities;
 
-import javax.persistence.Entity;
-import javax.persistence.SequenceGenerator;
+import javax.persistence.*;
 import java.io.Serializable;
+import java.sql.Timestamp;
+import java.util.Date;
+
 @Entity
 @SequenceGenerator(name = "documentsIdSeq", sequenceName = "documents_id_seq", allocationSize=1)
 public class Document implements Serializable {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO, generator = "documentIdSeq")
+    private int id;
+    private String item_number;
+    private Timestamp modified_on;
+    private String name;
+    private String description;
+    private Date created_on;
+    private int created_by_id;
+    private int modified_by_id;
+    private String current_state;
+    private int locked_by_id;
+    private boolean is_current;
+    private String minor_rev;
+    private boolean not_lockable;
+    private boolean is_release;
+    private int generation;
+    private boolean new_version;
+
 }

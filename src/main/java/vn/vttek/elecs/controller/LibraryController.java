@@ -51,8 +51,6 @@ public class LibraryController {
 
     @RequestMapping(value="/listado", method = RequestMethod.POST)
     public ModelAndView submitAdmissionForm(@ModelAttribute("book1") Product book) {
-
-
             ModelAndView model1 = new ModelAndView("success");
             return model1;
 	}

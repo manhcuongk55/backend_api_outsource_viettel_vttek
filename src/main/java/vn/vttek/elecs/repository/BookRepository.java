@@ -6,5 +6,6 @@ import org.springframework.data.repository.CrudRepository;
 
 @Transactional
 public interface BookRepository extends CrudRepository<Product,Integer>{
+
     
 }

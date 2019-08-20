@@ -1,5 +1,7 @@
 package vn.vttek.elecs.entities;
 
+import org.springframework.scheduling.support.SimpleTriggerContext;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.sql.Timestamp;
@@ -26,5 +28,11 @@ public class Document implements Serializable {
     private boolean is_release;
     private int generation;
     private boolean new_version;
-
+    private int config_id;
+    private String permission_id;
+    private Timestamp effected_date;
+    private Timestamp related_date;
+    private String authoring_tool;
+    private String authoring_tool_version;
+    private boolean has_files;
 }

@@ -7,6 +7,6 @@ import vn.vttek.elecs.entities.MgmtFunction;
 import javax.transaction.Transactional;
 
 @Transactional
-public interface MgmtFunctionRepository extends CrudRepository<MgmtFunction,String>{
+public interface MgmtFunctionRepository extends CrudRepository<MgmtFunction,Integer>{
     
 }

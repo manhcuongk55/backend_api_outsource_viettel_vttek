@@ -7,6 +7,6 @@ import vn.vttek.elecs.entities.GroupUser;
 import javax.transaction.Transactional;
 
 @Transactional
-public interface GroupUserRepository extends CrudRepository<GroupUser,String>{
+public interface GroupUserRepository extends CrudRepository<GroupUser,Integer>{
     
 }

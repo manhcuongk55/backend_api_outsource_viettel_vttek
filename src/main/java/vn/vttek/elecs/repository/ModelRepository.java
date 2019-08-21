@@ -7,6 +7,6 @@ import vn.vttek.elecs.entities.Model;
 import javax.transaction.Transactional;
 
 @Transactional
-public interface ModelRepository extends CrudRepository<Model,String>{
+public interface ModelRepository extends CrudRepository<Model,Integer>{
     
 }

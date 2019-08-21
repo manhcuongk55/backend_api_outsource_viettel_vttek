@@ -9,10 +9,10 @@ import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
 
 @Entity
-@SequenceGenerator(name = "userRolesIdSeq", sequenceName = "user_roles_id_seq", allocationSize=1)
+@SequenceGenerator(name = "user_rolesIdSeq", sequenceName = "user_roles_id_seq", allocationSize=1)
 public class UserRoles implements Serializable{
     @Id  
-    @GeneratedValue(strategy = GenerationType.AUTO, generator = "userRolesIdSeq")
+    @GeneratedValue(strategy = GenerationType.AUTO, generator = "user_rolesIdSeq")
     private Integer user_role_id;
     
     private String username;

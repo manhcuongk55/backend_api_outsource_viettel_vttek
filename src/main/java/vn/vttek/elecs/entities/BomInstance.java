@@ -5,10 +5,10 @@ import java.io.Serializable;
 import java.util.Date;
 
 @Entity
-@SequenceGenerator(name = "usersIdSeq", sequenceName = "users_id_seq", allocationSize = 1)
+@SequenceGenerator(name = "bom_instanceIdSeq", sequenceName = "bom_instance_id_seq", allocationSize = 1)
 public class BomInstance implements Serializable {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO, generator = "departmentIdSeq")
+    @GeneratedValue(strategy = GenerationType.AUTO, generator = "bom_instanceIdSeq")
     private int id;
     private int classification;
     private String keyed_name;

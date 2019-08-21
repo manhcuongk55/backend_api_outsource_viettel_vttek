@@ -7,6 +7,6 @@ import vn.vttek.elecs.entities.PartBom;
 import javax.transaction.Transactional;
 
 @Transactional
-public interface PartBomRepository extends CrudRepository<PartBom,String>{
+public interface PartBomRepository extends CrudRepository<PartBom,Integer>{
     
 }

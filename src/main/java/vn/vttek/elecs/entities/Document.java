@@ -8,7 +8,7 @@ import java.sql.Timestamp;
 import java.util.Date;
 
 @Entity
-@SequenceGenerator(name = "documentsIdSeq", sequenceName = "documents_id_seq", allocationSize=1)
+@SequenceGenerator(name = "documentIdSeq", sequenceName = "documents_id_seq", allocationSize=1)
 public class Document implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "documentIdSeq")

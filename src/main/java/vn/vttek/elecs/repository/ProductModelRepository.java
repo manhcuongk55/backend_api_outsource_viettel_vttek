@@ -7,6 +7,6 @@ import vn.vttek.elecs.entities.ProductModel;
 import javax.transaction.Transactional;
 
 @Transactional
-public interface ProductModelRepository extends CrudRepository<ProductModel,String>{
+public interface ProductModelRepository extends CrudRepository<ProductModel,Integer>{
     
 }

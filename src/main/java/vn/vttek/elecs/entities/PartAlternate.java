@@ -5,10 +5,10 @@ import java.io.Serializable;
 import java.util.Date;
 
 @Entity
-@SequenceGenerator(name = "usersIdSeq", sequenceName = "users_id_seq", allocationSize=1)
+@SequenceGenerator(name = "part_alternateIdSeq", sequenceName = "part_alternate_id_seq", allocationSize=1)
 public class PartAlternate implements Serializable {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO, generator = "departmentIdSeq")
+    @GeneratedValue(strategy = GenerationType.AUTO, generator = "part_alternateIdSeq")
     private int id;
     private int classification;
     private Date create_on;

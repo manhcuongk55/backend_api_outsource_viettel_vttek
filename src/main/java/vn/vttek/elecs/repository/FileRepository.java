@@ -7,6 +7,6 @@ import vn.vttek.elecs.entities.File;
 import javax.transaction.Transactional;
 
 @Transactional
-public interface FileRepository extends CrudRepository<File,String>{
+public interface FileRepository extends CrudRepository<File,Integer>{
     
 }

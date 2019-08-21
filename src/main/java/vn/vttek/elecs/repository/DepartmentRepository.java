@@ -8,6 +8,6 @@ import vn.vttek.elecs.entities.Document;
 import javax.transaction.Transactional;
 
 @Transactional
-public interface DepartmentRepository extends CrudRepository<Department,String>{
+public interface DepartmentRepository extends CrudRepository<Department,Integer>{
     
 }

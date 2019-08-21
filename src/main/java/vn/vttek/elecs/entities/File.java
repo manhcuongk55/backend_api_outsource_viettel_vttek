@@ -5,7 +5,7 @@ import java.io.Serializable;
 import java.util.Date;
 
 @Entity
-@SequenceGenerator(name = "filesIdSeq", sequenceName = "files_id_seq", allocationSize=1)
+@SequenceGenerator(name = "fileIdSeq", sequenceName = "file_id_seq", allocationSize=1)
 public class File implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "fileIdSeq")

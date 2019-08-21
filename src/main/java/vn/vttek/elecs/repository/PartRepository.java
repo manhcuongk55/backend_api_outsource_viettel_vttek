@@ -7,6 +7,6 @@ import vn.vttek.elecs.entities.Part;
 import javax.transaction.Transactional;
 
 @Transactional
-public interface PartRepository extends CrudRepository<Part,String>{
+public interface PartRepository extends CrudRepository<Part,Integer>{
     
 }

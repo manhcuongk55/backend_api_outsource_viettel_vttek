@@ -11,13 +11,13 @@ import vn.vttek.elecs.entities.Account;
  *
  * @author Master
  */
-public interface UserService {
-    public Iterable<Account> listAllUsers();
+public interface AccountService {
+    public Iterable<Account> listAllAccounts();
 	
-    public Account getUserByName(String username);
+    public Account getAccountByName(String username);
 
-    public Account saveUser(Account account);
+    public Account saveAccount(Account account);
 
-    public void deleteUser(String username);
+    public void deleteAccount(String username);
     
 }

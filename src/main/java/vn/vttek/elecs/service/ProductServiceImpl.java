@@ -6,7 +6,7 @@
 package vn.vttek.elecs.service;
 
 import vn.vttek.elecs.entities.Product;
-import vn.vttek.elecs.repository.BookRepository;
+import vn.vttek.elecs.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,29 +15,29 @@ import org.springframework.stereotype.Service;
  * @author Master
  */
 @Service
-public class BookServiceImpl implements BookService{
+public class ProductServiceImpl implements ProductService {
     
     @Autowired
-    private BookRepository bookRepository;
+    private ProductRepository productRepository;
     
     @Override
-    public Iterable<Product> listAllBooks() {
-        return bookRepository.findAll();
+    public Iterable<Product> listAllProducts() {
+        return productRepository.findAll();
     }
 
     @Override
-    public Product getBookById(Integer id) {
-        return bookRepository.findOne(id);
+    public Product getProductById(Integer id) {
+        return productRepository.findOne(id);
     }
 
     @Override
-    public Product saveBook(Product book) {
-        return bookRepository.save(book);
+    public Product saveProduct(Product book) {
+        return productRepository.save(book);
     }
 
     @Override
-    public void deleteBook(Integer id) {
-        bookRepository.delete(id);
+    public void deleteProduct(Integer id) {
+        productRepository.delete(id);
     }
     
 }

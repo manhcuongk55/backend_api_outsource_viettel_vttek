@@ -5,7 +5,7 @@
  */
 package vn.vttek.elecs.repository;
 
-import vn.vttek.elecs.entities.User_roles;
+import vn.vttek.elecs.entities.UserRoles;
 import javax.transaction.Transactional;
 import org.springframework.data.repository.CrudRepository;
 
@@ -14,6 +14,6 @@ import org.springframework.data.repository.CrudRepository;
  * @author Master
  */
 @Transactional
-public interface RoleRepository extends CrudRepository<User_roles,Integer>{
+public interface RoleRepository extends CrudRepository<UserRoles,Integer>{
     
 }

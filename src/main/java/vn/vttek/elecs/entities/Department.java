@@ -5,7 +5,7 @@ import java.io.Serializable;
 import java.util.Date;
 
 @Entity
-@SequenceGenerator(name = "departmentsIdSeq", sequenceName = "departments_id_seq", allocationSize=1)
+@SequenceGenerator(name = "departmentIdSeq", sequenceName = "department_id_seq", allocationSize=1)
 public class Department implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "departmentIdSeq")

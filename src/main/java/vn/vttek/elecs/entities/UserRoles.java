@@ -10,7 +10,7 @@ import javax.persistence.SequenceGenerator;
 
 @Entity
 @SequenceGenerator(name = "userRolesIdSeq", sequenceName = "user_roles_id_seq", allocationSize=1)
-public class User_roles implements Serializable{
+public class UserRoles implements Serializable{
     @Id  
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "userRolesIdSeq")
     private Integer user_role_id;
@@ -21,9 +21,9 @@ public class User_roles implements Serializable{
     
    
     
-    public User_roles() {}
+    public UserRoles() {}
 
-    public User_roles(String username) {
+    public UserRoles(String username) {
         this.role = "ROLE_ADMIN";
         this.username = username;
         

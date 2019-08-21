@@ -1,7 +1,7 @@
 package vn.vttek.elecs.controller;
 
 import vn.vttek.elecs.entities.Product;
-import vn.vttek.elecs.service.BookService;
+import vn.vttek.elecs.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,7 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 public class LibraryController {
     
     @Autowired
-    private BookService bookService;
+    private ProductService bookService;
     
     @RequestMapping("book/new")
     public String newProduct(Model model){
@@ -25,27 +25,27 @@ public class LibraryController {
    
     @RequestMapping(value = "book", method = RequestMethod.POST)
     public String saveBook(Product book) {
-        bookService.saveBook(book);
+        bookService.saveProduct(book);
         System.out.println("save book");
         return "redirect:/books";
     }
     
     @RequestMapping("book/delete/{id}")
     public String deleteBook(@PathVariable Integer id) {
-        bookService.deleteBook(id);
+        bookService.deleteProduct(id);
         return "redirect:/books";
     }
     
     @RequestMapping("book/edit/{id}")
     public String editBook(@PathVariable Integer id, Model model) {
         System.out.println("edit book");
-        model.addAttribute("book", bookService.getBookById(id));
+        model.addAttribute("book", bookService.getProductById(id));
         return "newBook";
     }
 
     @RequestMapping("/books")
     public String bookList(Model model) {
-        model.addAttribute("books",this.bookService.listAllBooks());
+        model.addAttribute("books",this.bookService.listAllProducts());
         return "bookList";
     }
 

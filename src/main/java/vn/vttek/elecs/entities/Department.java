@@ -2,6 +2,7 @@ package vn.vttek.elecs.entities;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.sql.Timestamp;
 import java.util.Date;
 
 @Entity
@@ -9,7 +10,7 @@ import java.util.Date;
 public class Department implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "departmentIdSeq")
-    private Integer id;
+    private Long id;
 
     private int par_id;
     private String code;
@@ -28,11 +29,11 @@ public class Department implements Serializable {
         this.created_on = created_on;
     }
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -74,5 +75,8 @@ public class Department implements Serializable {
 
     public void setCreated_on(Date created_on) {
         this.created_on = created_on;
+    }
+
+    public void setModified_on(Timestamp modified_on) {
     }
 }

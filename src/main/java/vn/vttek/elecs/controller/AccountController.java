@@ -1,67 +1,159 @@
 package vn.vttek.elecs.controller;
 
-import org.springframework.boot.context.config.ResourceNotFoundException;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 import vn.vttek.elecs.entities.Account;
-import vn.vttek.elecs.service.AccountService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
+import vn.vttek.elecs.entities.Role;
+import vn.vttek.elecs.entities.RoleName;
+import vn.vttek.elecs.message.request.LoginForm;
+import vn.vttek.elecs.message.request.SignUpForm;
+import vn.vttek.elecs.message.response.JwtResponse;
+import vn.vttek.elecs.repository.AccountRepository;
+import vn.vttek.elecs.repository.RoleRepository;
+import vn.vttek.elecs.security.jwt.JwtProvider;
 
 import javax.validation.Valid;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.HashSet;
+import java.util.Set;
 
+@CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
+@RequestMapping("/api/account")
 public class AccountController {
 
+
     @Autowired
-    private AccountService accountService;
+    AuthenticationManager authenticationManager;
 
-    @GetMapping("/accounts")
-    public Iterable<Account> getAllAccounts() {
-        return accountService.listAllAccounts();
+    @Autowired
+    AccountRepository accountRepository;
+
+    @Autowired
+    RoleRepository roleRepository;
+
+
+    @Autowired
+    JwtProvider jwtProvider;
+
+    @PostMapping("/login")
+    public ResponseEntity<?> login(@Valid @RequestBody LoginForm loginRequest) {
+
+        Authentication authentication = authenticationManager.authenticate(
+                new UsernamePasswordAuthenticationToken(
+                        loginRequest.getUsername(),
+                        loginRequest.getPassword()
+                )
+        );
+
+        SecurityContextHolder.getContext().setAuthentication(authentication);
+
+        String jwt = jwtProvider.generateJwtToken(authentication);
+        return ResponseEntity.ok(new JwtResponse(jwt));
     }
 
-    @GetMapping("/employees/{id}")
-    public ResponseEntity<Account> getEmployeeById(@PathVariable(value = "id") Long employeeId)
-            throws ResourceNotFoundException {
-        Account account = accountService.getAccountByName(employeeId)
-                .orElseThrow(() -> new ResourceNotFoundException("Employee not found for this id :: " + employeeId));
-        return ResponseEntity.ok().body(account);
+    @PostMapping("/addNewAccount")
+    public ResponseEntity<String> createAccount(@Valid @RequestBody SignUpForm signUpRequest) {
+        if (accountRepository.existsByUsername(signUpRequest.getUsername())) {
+            return new ResponseEntity<String>("Fail -> Username is already taken!",
+                    HttpStatus.BAD_REQUEST);
+        }
+
+        if (accountRepository.existsByEmail(signUpRequest.getEmail())) {
+            return new ResponseEntity<String>("Fail -> Email is already in use!",
+                    HttpStatus.BAD_REQUEST);
+        }
+
+        // Creating user's account
+        Account account = new Account(signUpRequest.getName(), signUpRequest.getUsername(),
+                signUpRequest.getEmail(), getEncoder().encode(signUpRequest.getPassword()));
+
+        Set<String> strRoles = signUpRequest.getRole();
+        Set<Role> roles = new HashSet<>();
+
+        strRoles.forEach(role -> {
+            switch (role) {
+                case "admin":
+                    Role adminRole = roleRepository.findByName(RoleName.ROLE_ADMIN)
+                            .orElseThrow(() -> new RuntimeException("Fail! -> Cause: User Role not find."));
+                    roles.add(adminRole);
+
+                    break;
+                case "pm":
+                    Role pmRole = roleRepository.findByName(RoleName.ROLE_PM)
+                            .orElseThrow(() -> new RuntimeException("Fail! -> Cause: User Role not find."));
+                    roles.add(pmRole);
+
+                    break;
+                default:
+                    Role userRole = roleRepository.findByName(RoleName.ROLE_USER)
+                            .orElseThrow(() -> new RuntimeException("Fail! -> Cause: User Role not find."));
+                    roles.add(userRole);
+            }
+        });
+
+        account.setRoles(roles);
+        accountRepository.save(account);
+
+        return ResponseEntity.ok().body("User registered successfully!");
     }
 
-    @PostMapping("/employees")
-    public Account createEmployee(@Valid @RequestBody Account employee) {
-        return accountService.save(employee);
+    @PutMapping("/updateInfoAccount")
+    public ResponseEntity<String> updateAccount(@Valid @RequestBody SignUpForm signUpRequest) {
+        if (accountRepository.existsByUsername(signUpRequest.getUsername())) {
+            return new ResponseEntity<String>("Fail -> Username is already taken!",
+                    HttpStatus.BAD_REQUEST);
+        }
+
+        if (accountRepository.existsByEmail(signUpRequest.getEmail())) {
+            return new ResponseEntity<String>("Fail -> Email is already in use!",
+                    HttpStatus.BAD_REQUEST);
+        }
+
+        // Creating user's account
+        Account account = new Account(signUpRequest.getName(), signUpRequest.getUsername(),
+                signUpRequest.getEmail(), getEncoder().encode(signUpRequest.getPassword()));
+
+        Set<String> strRoles = signUpRequest.getRole();
+        Set<Role> roles = new HashSet<>();
+
+        strRoles.forEach(role -> {
+            switch (role) {
+                case "admin":
+                    Role adminRole = roleRepository.findByName(RoleName.ROLE_ADMIN)
+                            .orElseThrow(() -> new RuntimeException("Fail! -> Cause: User Role not find."));
+                    roles.add(adminRole);
+
+                    break;
+                case "pm":
+                    Role pmRole = roleRepository.findByName(RoleName.ROLE_PM)
+                            .orElseThrow(() -> new RuntimeException("Fail! -> Cause: User Role not find."));
+                    roles.add(pmRole);
+
+                    break;
+                default:
+                    Role userRole = roleRepository.findByName(RoleName.ROLE_USER)
+                            .orElseThrow(() -> new RuntimeException("Fail! -> Cause: User Role not find."));
+                    roles.add(userRole);
+            }
+        });
+
+        account.setRoles(roles);
+        accountRepository.save(account);
+
+        return ResponseEntity.ok().body("User registered successfully!");
     }
 
-    @PutMapping("/employees/{id}")
-    public ResponseEntity<Account> updateEmployee(@PathVariable(value = "id") Long employeeId,
-                                                  @Valid @RequestBody Employee employeeDetails) throws ResourceNotFoundException {
-        Account account = accountService.findById(employeeId)
-                .orElseThrow(() -> new ResourceNotFoundException("Employee not found for this id :: " + employeeId));
-
-        employee.setEmailId(employeeDetails.getEmailId());
-        employee.setLastName(employeeDetails.getLastName());
-        employee.setFirstName(employeeDetails.getFirstName());
-        final Account updatedEmployee = employeeRepository.save(employee);
-        return ResponseEntity.ok(updatedEmployee);
-    }
-
-    @DeleteMapping("/employees/{id}")
-    public Map<String, Boolean> deleteEmployee(@PathVariable(value = "id") Long employeeId)
-            throws ResourceNotFoundException {
-        Account account = employeeRepository.findById(employeeId)
-                .orElseThrow(() -> new ResourceNotFoundException("Employee not found for this id :: " + employeeId));
-
-        employeeRepository.delete(account);
-        Map<String, Boolean> response = new HashMap<>();
-        response.put("deleted", Boolean.TRUE);
-        return response;
+    @Bean
+    PasswordEncoder getEncoder() {
+        return new BCryptPasswordEncoder();
     }
 }

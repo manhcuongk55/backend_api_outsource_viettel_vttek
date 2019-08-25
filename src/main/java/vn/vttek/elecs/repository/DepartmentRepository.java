@@ -1,13 +1,10 @@
 package vn.vttek.elecs.repository;
 
-import org.springframework.data.repository.CrudRepository;
-import vn.vttek.elecs.entities.Account;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 import vn.vttek.elecs.entities.Department;
-import vn.vttek.elecs.entities.Document;
 
-import javax.transaction.Transactional;
+@Repository
+public interface DepartmentRepository extends JpaRepository<Department, Long> {
 
-@Transactional
-public interface DepartmentRepository extends CrudRepository<Department,Integer>{
-    
 }

@@ -1,12 +1,10 @@
 package vn.vttek.elecs.repository;
 
-import org.springframework.data.repository.CrudRepository;
-import vn.vttek.elecs.entities.Account;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 import vn.vttek.elecs.entities.ProductModel;
 
-import javax.transaction.Transactional;
+@Repository
+public interface ProductModelRepository extends JpaRepository<ProductModel, Long> {
 
-@Transactional
-public interface ProductModelRepository extends CrudRepository<ProductModel,Integer>{
-    
 }

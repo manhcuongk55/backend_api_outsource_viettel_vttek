@@ -21,6 +21,11 @@ public class ProductController {
         return (Page<Product>) productRepository.findAll();
     }
 
+    @GetMapping("/product/getListProduct")
+    public Page<Product> getListProduct(@RequestParam String id) {
+        return (Page<Product>) productRepository.findAll();
+    }
+
 
     @PostMapping("/product")
     public Product createProduct(@Valid @RequestBody Product product) {

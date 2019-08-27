@@ -23,7 +23,7 @@ public class ProductController {
 
     @GetMapping("/product/getListProduct")
     public Page<Product> getListProduct(@RequestParam String id) {
-        return (Page<Product>) productRepository.findAll();
+        return (Page<Product>) productRepository.getListProduct(id);
     }
 
 
